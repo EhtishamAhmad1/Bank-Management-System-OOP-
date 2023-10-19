@@ -100,7 +100,6 @@ void display_all();
 ///////////MAIN PROGRAM////////////
 int main()
 {
-    cout << "Hello";
     char ch;
     char ch2;
     char ch3;
