@@ -1,13 +1,12 @@
-#include<iostream>
-#include<fstream>
-#include<string>
-#include<conio.h>
-#include<cctype>
-#include<iomanip>
-#include<stdio.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <conio.h>
+#include <cctype>
+#include <iomanip>
+#include <stdio.h>
 
 using namespace std;
-
 
 class bank
 {
@@ -15,6 +14,7 @@ private:
     int acc_no, amount;
     char name[100];
     char acc_type[10];
+
 public:
     void create_acc();
     void modify_acc();
@@ -40,7 +40,6 @@ void bank::create_acc()
     cout << "Enter initial amount in the account: ";
     cin >> amount;
     cout << "\t\tAccount created\n\n";
-
 }
 
 ////////////modyfying account/////////////////
@@ -57,7 +56,8 @@ void bank::modify_acc()
     cout << "\t\tAccount updated\n\n";
 }
 
-int bank::account() {
+int bank::account()
+{
     return acc_no;
 }
 
@@ -97,10 +97,10 @@ void delete_acc();
 void dep_with(int, int);
 void display_all();
 
-
 ///////////MAIN PROGRAM////////////
 int main()
 {
+    cout << "Hello";
     char ch;
     char ch2;
     char ch3;
@@ -112,7 +112,8 @@ int main()
     cout << "\t\t\t\t\tBANK SYSTEM\n";
     cout << "\t\t\t\t--------------------------\n";
     cout << "\t\t\t\t\t WELCOME\n";
-    do {
+    do
+    {
         cout << "\t\t\t\t1-Login as an Employee\n";
         cout << "\t\t\t\t2-Login as a Customer\n";
         cout << "\t\t\t\t3-Exit\n";
@@ -125,8 +126,9 @@ int main()
         cin >> ch;
         switch (ch)
         {
-        case'1':
-            do {
+        case '1':
+            do
+            {
                 cout << "\n\t\t\tEnter password to login as an Employee : ";
                 cin >> pass;
                 if (pass != "abc123")
@@ -136,7 +138,8 @@ int main()
             } while (pass != "abc123");
 
             cout << "\n\t\t\tYou are logged in as an Employee \n";
-            do {
+            do
+            {
 
                 cout << "\t\t\t1-Add Account\n";
                 cout << "\t\t\t2-Modify Account\n";
@@ -147,16 +150,16 @@ int main()
                 cin >> ch2;
                 switch (ch2)
                 {
-                case'1':
+                case '1':
                     write_acc();
                     break;
-                case'2':
+                case '2':
                     up_acc();
                     break;
-                case'3':
+                case '3':
                     delete_acc();
                     break;
-                case'4':
+                case '4':
                     display_all();
                     break;
                 default:
@@ -166,7 +169,7 @@ int main()
             } while (ch2 != '5');
 
             break;
-        case'2':
+        case '2':
             cout << "\n\t\t\tYou are logged in as a Customer\n";
 
             do
@@ -178,17 +181,17 @@ int main()
                 cin >> ch3;
                 switch (ch3)
                 {
-                case'1':
+                case '1':
                     cout << "Enter account number to withdraw ammount: ";
                     cin >> num;
                     dep_with(num, 1);
                     break;
-                case'2':
+                case '2':
                     cout << "Enter account number to deposit ammount: ";
                     cin >> num;
                     dep_with(num, 2);
                     break;
-                case'3':
+                case '3':
                     read_acc();
                     break;
                 default:
@@ -196,14 +199,11 @@ int main()
                 }
             } while (ch3 != '4');
             break;
-
         }
-
 
     } while (ch != '3');
 
     return 0;
-
 }
 
 void write_acc()
@@ -220,9 +220,8 @@ void write_acc()
         cout << "file created\n";
     }*/
     b.create_acc();
-    input.write((char*)&b, sizeof(b));
+    input.write((char *)&b, sizeof(b));
     input.close();
-
 }
 
 void read_acc()
@@ -240,7 +239,7 @@ void read_acc()
     }
     else
     {
-        while (output.read((char*)&b, sizeof(b)))
+        while (output.read((char *)&b, sizeof(b)))
         {
             if (b.account() == num)
             {
@@ -252,7 +251,6 @@ void read_acc()
         if (count == 0)
             cout << "\n\n\t\t\tAccount number does not exist\n\n";
         output.close();
-
     }
 }
 
@@ -272,7 +270,7 @@ void up_acc()
     }
     else
     {
-        while (update.read((char*)&b, sizeof(b)))
+        while (update.read((char *)&b, sizeof(b)))
         {
 
             if (b.account() == num)
@@ -283,16 +281,14 @@ void up_acc()
                 b.modify_acc();
                 int pos = (-1) * static_cast<int>(sizeof(b));
                 update.seekp(pos, ios::cur);
-                update.write((char*)&b, sizeof(b));
+                update.write((char *)&b, sizeof(b));
                 break;
             }
         }
         if (count == 0)
             cout << "\n\n\t\t\tAccount number does not exist\n\n";
         update.close();
-
     }
-
 }
 
 void delete_acc()
@@ -312,11 +308,11 @@ void delete_acc()
         int acc_num;
         cout << "Enter account number to delete account : ";
         cin >> acc_num;
-        while (infile.read((char*)&b, sizeof(b)))
+        while (infile.read((char *)&b, sizeof(b)))
         {
             if (b.account() != acc_num)
             {
-                outfile.write((char*)&b, sizeof(b));
+                outfile.write((char *)&b, sizeof(b));
             }
         }
         infile.close();
@@ -341,7 +337,7 @@ void dep_with(int n, int option)
     }
     else
     {
-        while (count == 0 && file.read((char*)&b, sizeof(b)))
+        while (count == 0 && file.read((char *)&b, sizeof(b)))
         {
 
             if (b.account() == n)
@@ -366,12 +362,11 @@ void dep_with(int n, int option)
                     cout << "Enter ammount to deposit : ";
                     cin >> amt;
                     b.dep(amt);
-
                 }
 
                 int pos = (-1) * static_cast<int>(sizeof(b));
                 file.seekp(pos, ios::cur);
-                file.write((char*)&b, sizeof(b));
+                file.write((char *)&b, sizeof(b));
                 cout << "\n\t\t\"Record Updated\"\n";
                 count = 1;
             }
@@ -385,7 +380,6 @@ void dep_with(int n, int option)
     }
 }
 
-
 void display_all()
 {
     // system("CLS");
@@ -395,15 +389,17 @@ void display_all()
     if (!inFile)
     {
         cout << "File could not be open !! Press any Key...";
-
     }
     else
     {
         cout << "\n\n\t\tACCOUNT HOLDER LIST\n\n";
         cout << "\t\t====================================================\n";
-        cout << "\t\tA/c no.\t" << "NAME\t" << "Type\t" << "Balance\n";
+        cout << "\t\tA/c no.\t"
+             << "NAME\t"
+             << "Type\t"
+             << "Balance\n";
         cout << "\t\t====================================================\n";
-        while (inFile.read((char*)&b, sizeof(b)))
+        while (inFile.read((char *)&b, sizeof(b)))
         {
             b.all_acc();
         }
